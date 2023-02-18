@@ -1,23 +1,25 @@
 package mergesort
 
 func merge(left, right []int) []int {
-	res := []int{}
-	sizeL := len(left)
-	sizeR := len(right)
-	for i := 0; i < sizeL && i < sizeR; i++ {
-		if left[i] > right[i] {
-			res = append(res, right[i], left[i])
+	var res []int = make([]int, len(left)+len(right))
+	var i, j, k, m int
+	for i < len(left) && j < len(right) {
+		if left[i] >= right[j] {
+			res[k] = right[j]
+			j++
 		} else {
-			res = append(res, left[i], right[i])
+			res[k] = left[i]
+			i++
 		}
+		k++
 	}
-	if sizeL != sizeR {
-		if left[sizeL-1] > right[sizeR-1] {
-			res[len(res)-1] = right[sizeR-1]
-			res = append(res, left[sizeL-1])
-		} else {
-			res = append(res, right[sizeR-1])
-		}
+	for m = i; m < len(left); m++ {
+		res[k] = left[m]
+		k++
+	}
+	for m = j; m < len(right); m++ {
+		res[k] = right[m]
+		k++
 	}
 	return res
 
