@@ -6,21 +6,7 @@ func swap(n1, n2 int, arr []int) {
 	arr[n2] = temp
 }
 
-// method 1
-func BubbleSort1(arr []int) []int {
-	size := len(arr)
-	for i := 0; i < size; i++ {
-		for j := 0; j < size-1; j++ {
-			if arr[j] > arr[i] {
-				swap(i, j, arr)
-			}
-		}
-	}
-	return arr
-}
-
-// method 2
-func BubbleSort2(arr []int) []int {
+func BubbleSort(arr []int) []int {
 	swapped := true
 	for swapped {
 		swapped = false
