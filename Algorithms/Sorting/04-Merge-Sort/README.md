@@ -1,4 +1,4 @@
-# Selection Sort
+# Merge Sort
 
 ## Description
 
