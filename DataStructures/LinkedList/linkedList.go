@@ -1,5 +1,7 @@
 package linked_list
 
+import "fmt"
+
 type Node struct {
 	data int
 	next *Node
@@ -65,6 +67,7 @@ func (list *LinkedList) Get(index int) int {
 
 	return current.data
 }
+
 func (list *LinkedList) Search(value int) int {
 	if list.head == nil {
 		return -1
@@ -82,4 +85,53 @@ func (list *LinkedList) Search(value int) int {
 	}
 
 	return -1
+}
+
+func (list *LinkedList) ToArray() []int {
+	if list.head == nil {
+		return []int{}
+	}
+	arr := make([]int, list.Length())
+	i := 0
+	current := list.head
+
+	for current != nil {
+		arr[i] = current.data
+		i++
+		current = current.next
+	}
+	return arr
+}
+
+func (list *LinkedList) Print() {
+	if list.head == nil {
+		fmt.Println("[]")
+	}
+
+	current := list.head
+
+	fmt.Printf("[ ")
+	for current != nil {
+		fmt.Printf("%d => ", current.data)
+		current = current.next
+	}
+	fmt.Println("nil ]")
+}
+func (list *LinkedList) Delete(index int) bool {
+	if list.head == nil {
+		return false
+	}
+	if index == 0 {
+		list.head = list.head.next
+		return true
+	}
+	current := list.head
+	for i := 0; i < index-1 && current != nil; i++ {
+		current = current.next
+	}
+	if current.next == nil {
+		return false
+	}
+	current.next = current.next.next
+	return true
 }

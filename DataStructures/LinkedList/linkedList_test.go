@@ -1,6 +1,7 @@
 package linked_list
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -49,5 +50,30 @@ func TestSearch(t *testing.T) {
 
 	if list.Search(20) != 1 {
 		t.Error("Expected search for value 20 to return 2")
+	}
+}
+func TestToArray(t *testing.T) {
+	list := NewLinkedList()
+
+	list.Append(1)
+	list.Append(7)
+	list.Append(0)
+	arr := list.ToArray()
+
+	if !reflect.DeepEqual([]int{1, 7, 0}, arr) {
+		t.Errorf("Incorrect array result. Expected: %v, got: %v", []int{1, 7, 0}, arr)
+	}
+}
+func TestDelete(t *testing.T) {
+	list := NewLinkedList()
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(8)
+	list.Delete(1)
+	arr := list.ToArray()
+
+	if !reflect.DeepEqual([]int{10, 8}, arr) {
+		t.Errorf("List after deletion is incorrect. Expected: %v, got: %v", []int{10, 8}, arr)
 	}
 }
