@@ -40,3 +40,14 @@ func TestAppend(t *testing.T) {
 		t.Errorf("Expected value at position 0 to be 10, got %d", value)
 	}
 }
+
+func TestSearch(t *testing.T) {
+	list := NewLinkedList()
+
+	list.Append(10)
+	list.Append(20)
+
+	if list.Search(20) != 1 {
+		t.Error("Expected search for value 20 to return 2")
+	}
+}

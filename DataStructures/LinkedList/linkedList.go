@@ -25,7 +25,7 @@ func (list *LinkedList) Append(value int) {
 
 	current := list.head
 
-	for current != nil {
+	for current.next != nil {
 		current = current.next
 	}
 
@@ -64,4 +64,22 @@ func (list *LinkedList) Get(index int) int {
 	}
 
 	return current.data
+}
+func (list *LinkedList) Search(value int) int {
+	if list.head == nil {
+		return -1
+	}
+
+	current := list.head
+	var index int = 0
+
+	for current != nil {
+		if current.data == value {
+			return index
+		}
+		current = current.next
+		index++
+	}
+
+	return -1
 }
