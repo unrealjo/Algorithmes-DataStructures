@@ -1,6 +1,9 @@
 package linked_list
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Node struct {
 	data int
@@ -59,9 +62,9 @@ func (list LinkedList) Length() int {
 	return count
 
 }
-func (list LinkedList) Get(index int) int {
+func (list LinkedList) Get(index int) (int, error) {
 	if list.head == nil {
-		return 0
+		return 0, errors.New("list is empty")
 	}
 
 	current := list.head
@@ -72,10 +75,10 @@ func (list LinkedList) Get(index int) int {
 	}
 
 	if index != 0 {
-		return 0
+		return 0, errors.New("index out of bound")
 	}
 
-	return current.data
+	return current.data, nil
 }
 
 func (list LinkedList) Search(value int) int {
@@ -144,4 +147,22 @@ func (list *LinkedList) Delete(index int) bool {
 	}
 	current.next = current.next.next
 	return true
+}
+
+func (list *LinkedList) Reverse() {
+	if list.head == nil {
+		return
+	}
+
+	current := list.head
+	var previous *Node
+	var next *Node
+
+	for current != nil {
+		next = current.next
+		current.next = previous
+		previous = current
+		current = next
+	}
+	list.head = previous
 }

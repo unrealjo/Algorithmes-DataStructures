@@ -36,7 +36,10 @@ func TestAppend(t *testing.T) {
 		t.Error("Expected linked list length to be 1 after appending an element")
 	}
 
-	value := list.Get(0)
+	value, err := list.Get(0)
+	if err != nil {
+		t.Fatalf("Failed to retrieve value: %v", err)
+	}
 	if value != 10 {
 		t.Errorf("Expected value at position 0 to be 10, got %d", value)
 	}
@@ -48,7 +51,10 @@ func TestPrepend(t *testing.T) {
 	list.Append(3)
 	list.Prepend(20)
 
-	value := list.Get(0)
+	value, err := list.Get(0)
+	if err != nil {
+		t.Fatalf("Failed to retrieve value: %v", err)
+	}
 	if value != 20 {
 		t.Errorf("Expected value at position 0 to be 20, got %d", value)
 	}
@@ -87,5 +93,28 @@ func TestDelete(t *testing.T) {
 
 	if !reflect.DeepEqual([]int{10, 8}, arr) {
 		t.Errorf("List after deletion is incorrect. Expected: %v, got: %v", []int{10, 8}, arr)
+	}
+}
+
+func TestReverse(t *testing.T) {
+	list := NewLinkedList()
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+	list.Append(40)
+
+	list.Reverse()
+
+	expected := []int{40, 30, 20, 10}
+	for i, val := range expected {
+		value, err := list.Get(i)
+		if err != nil {
+			t.Fatalf("Failed to retrieve value: %v", err)
+		}
+
+		if value != val {
+			t.Errorf("Expected value at position %d to be %d, got %d", i, val, value)
+		}
 	}
 }
