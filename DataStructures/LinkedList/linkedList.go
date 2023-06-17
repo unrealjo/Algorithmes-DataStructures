@@ -14,14 +14,14 @@ func NewLinkedList() LinkedList {
 	return LinkedList{head: nil}
 }
 
-func (list *LinkedList) IsEmpty() bool {
+func (list LinkedList) IsEmpty() bool {
 	return list.head == nil
 }
 func (list *LinkedList) Append(value int) {
-	tmp := Node{data: value, next: nil}
+	tmp := &Node{data: value, next: nil}
 
 	if list.head == nil {
-		list.head = &tmp
+		list.head = tmp
 		return
 	}
 
@@ -31,9 +31,19 @@ func (list *LinkedList) Append(value int) {
 		current = current.next
 	}
 
-	current.next = &tmp
+	current.next = tmp
 }
-func (list *LinkedList) Length() int {
+func (list *LinkedList) Prepend(value int) {
+	tmp := &Node{data: value, next: nil}
+
+	if list.head == nil {
+		list.head = tmp
+		return
+	}
+	tmp.next = list.head
+	list.head = tmp
+}
+func (list LinkedList) Length() int {
 	if list.head == nil {
 		return 0
 	}
@@ -49,7 +59,7 @@ func (list *LinkedList) Length() int {
 	return count
 
 }
-func (list *LinkedList) Get(index int) int {
+func (list LinkedList) Get(index int) int {
 	if list.head == nil {
 		return 0
 	}
@@ -68,7 +78,7 @@ func (list *LinkedList) Get(index int) int {
 	return current.data
 }
 
-func (list *LinkedList) Search(value int) int {
+func (list LinkedList) Search(value int) int {
 	if list.head == nil {
 		return -1
 	}
@@ -87,7 +97,7 @@ func (list *LinkedList) Search(value int) int {
 	return -1
 }
 
-func (list *LinkedList) ToArray() []int {
+func (list LinkedList) ToArray() []int {
 	if list.head == nil {
 		return []int{}
 	}
@@ -103,7 +113,7 @@ func (list *LinkedList) ToArray() []int {
 	return arr
 }
 
-func (list *LinkedList) Print() {
+func (list LinkedList) Print() {
 	if list.head == nil {
 		fmt.Println("[]")
 	}
