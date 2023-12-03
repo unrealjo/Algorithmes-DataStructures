@@ -1,7 +1,6 @@
 package quicksort
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -23,8 +22,6 @@ func TestQuickSort(t *testing.T) {
 		QuickSort(get, 0, len(get)-1)
 		if !reflect.DeepEqual(get, test.expected) {
 			t.Errorf("Expect %v got %d", test.expected, get)
-		} else {
-			fmt.Printf("Array : %v\t=> Sorted : %v\n", test.arr, get)
 		}
 	}
 }
